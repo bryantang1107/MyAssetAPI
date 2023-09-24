@@ -13,5 +13,6 @@ namespace ContactsAPI.Models.ExpenseModel
 		[Column(TypeName = "decimal (18,2)")]
 		public decimal Amount { get; set; }
 
+		public DateTime TimeStamp { get; set; }
 	}
 }
