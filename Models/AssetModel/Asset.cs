@@ -9,8 +9,6 @@ namespace ContactsAPI.Models.AssetModel
 		public string Symbol { get; set; }
 		public string Name { get; set; }
 
-		public string Currency { get; set; }
-		public string Exchange { get; set; }
 		public string Type { get; set; }
 		[Column(TypeName = "decimal (18,2)")] //explicitly specify data type using data annotation
 		public decimal Amount { get; set; }

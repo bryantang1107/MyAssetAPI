@@ -3,6 +3,7 @@ using ContactsAPI.Models.AssetModel;
 using ContactsAPI.Models.UserModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MyCapitalAPI.Models.AssetModel;
 
 namespace ContactsAPI.Controllers
 {
@@ -17,7 +18,7 @@ namespace ContactsAPI.Controllers
 		}
 		[HttpGet]
 		[Route("{id:guid}")]
-		public async Task<IActionResult> GetUser([FromRoute] Guid id)
+		public async Task<IActionResult> GetAsset([FromRoute] Guid id)
 		{
 			Asset? asset = await dbContext.Assets.FindAsync(id);
 			if (asset == null) return NotFound();
@@ -25,5 +26,24 @@ namespace ContactsAPI.Controllers
 			return Ok(asset);
 		}
 
+		[HttpPost]
+		public async Task<IActionResult> AddAsset(AddAssetRequest addAssetRequest) //using async function, IActionResult must be wrapped inside Task
+		{
+			var asset = new Asset()
+			{
+				Id = Guid.NewGuid(),
+				Symbol = addAssetRequest.Symbol,
+				Name = addAssetRequest.Name,
+				Type = addAssetRequest.Type,
+				Amount = addAssetRequest.Amount,
+				Category = addAssetRequest.Category,
+				TimeStamp= DateTime.Now,
+			};
+
+			await dbContext.Assets.AddAsync(asset); //insert contact object into Contacts table
+			await dbContext.SaveChangesAsync();
+
+			return Ok(asset);
+		}
 	}
 }
