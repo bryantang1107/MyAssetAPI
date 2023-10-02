@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using ContactsAPI.Models.UserModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContactsAPI.Models.AssetModel
 {
@@ -15,10 +16,8 @@ namespace ContactsAPI.Models.AssetModel
 		public char Category { get; set; }
 
 		public DateTime TimeStamp { get; set; }
-		//data return from public api
-
-		//user foreign key 
-
+		
+		public User User { get; set; }
 
 	}
 }

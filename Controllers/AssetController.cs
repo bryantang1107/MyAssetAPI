@@ -18,12 +18,11 @@ namespace ContactsAPI.Controllers
 		}
 		[HttpGet]
 		[Route("{id:guid}")]
-		public async Task<IActionResult> GetAsset([FromRoute] Guid id)
+		public async Task<IActionResult> GetAsset([FromRoute] Guid id) //get asset based on id
 		{
-			Asset? asset = await dbContext.Assets.FindAsync(id);
-			if (asset == null) return NotFound();
-
+			Asset[] asset = await dbContext.Assets.Where(a => a.User.Id== id).ToArrayAsync();
 			return Ok(asset);
+
 		}
 
 		[HttpPost]
@@ -31,7 +30,7 @@ namespace ContactsAPI.Controllers
 		{
 			var asset = new Asset()
 			{
-				Id = Guid.NewGuid(),
+				Id = addAssetRequest.User.Id,
 				Symbol = addAssetRequest.Symbol,
 				Name = addAssetRequest.Name,
 				Type = addAssetRequest.Type,

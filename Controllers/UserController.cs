@@ -7,7 +7,7 @@ namespace ContactsAPI.Controllers
 {
     //[] --> Web annotation 
     [ApiController] //to let .net know that this is an API controller not MVC controller
-	[Route("api/contacts")] //name of route
+	[Route("api/users")] //name of route
 							//alternative
 							//[Route("api/[controller]")] --> replace "controller" with contacts
 	public class UserController : Controller
